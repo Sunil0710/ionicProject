@@ -1,0 +1,7 @@
+<!-- Generated template for the PopoverComponent component -->
+<ion-list radio-group>
+  <ion-item *ngFor="let item of items">
+    <ion-label> {{item.text}}</ion-label>
+    <ion-radio value="{{item.value}}" (click)="chageLabel(item)" checked="{{item.checked}}"></ion-radio>
+  </ion-item>
+</ion-list>
