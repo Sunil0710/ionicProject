@@ -1,24 +1,30 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, reorderArray, FabContainer, normalizeURL, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, reorderArray, FabContainer, normalizeURL, PopoverController, ModalController } from 'ionic-angular';
 
 import { Item } from '../../models/item/item.model';
 import { ShoppingListService } from '../../services/shopping-list/shopping-list-service';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { ToastService } from '../../services/toast/toast-service';
 import { PopoverComponent } from '../../components/popover/popover';
+
+import { bounce } from '../../app/animations';
 
 @IonicPage()
 @Component({
   selector: 'page-add-shopping-item',
   templateUrl: 'add-shopping-item.html',
+  animations:[
+    bounce
+  ]
 })
 export class AddShoppingItemPage {
 
   item: Item = {
     title: '',
     label: '',
+    status: '',
+    startDate: '',
     listedItems: [],
-    strikedItems: []
+    strikedItems: [],
   };
 
   public photos: any;
@@ -29,10 +35,12 @@ export class AddShoppingItemPage {
     public navParams: NavParams,
     private camera: Camera,
     private shopping: ShoppingListService,
-    private toast: ToastService,
-    public popoverCtrl: PopoverController
+    public popoverCtrl: PopoverController,
+    public modalCtrl: ModalController
   ) {
-
+    this.photos = [];
+    this.item.status = "active";
+    //this.item.startDate = new Date().toISOString();
   }
 
   ionViewDidLoad() {
@@ -92,26 +100,8 @@ export class AddShoppingItemPage {
     this.item.listedItems = reorderArray(this.item.listedItems, indexes);
   }
 
-  //archive toast
-  // arhiveToast(){
-  //   this.toast.show(`archived`).then(() => {
-  //     this.navCtrl.setRoot('HomePage');
-  //   });
-  // }
-
-  //delete toast
-  // deleteToast(){
-  //   this.toast.show(`deleted`).then(() => {
-  //     this.navCtrl.setRoot('HomePage');
-  //   });
-
-    // this.toast.onDidDismiss(()=> {
-    //   this.navCtrl.setRoot('HomePage');
-    // });
-
-  // }
-
-  presentPopover(myEvent) {
+  // add labels to item
+  presentPopover(myEvent, fab: FabContainer) {
     let popover = this.popoverCtrl.create(PopoverComponent);
     popover.present({
       ev: myEvent
@@ -119,8 +109,36 @@ export class AddShoppingItemPage {
 
     popover.onDidDismiss(popoverData => {
       console.log(popoverData);
+      // this.item.label = popoverData;
       this.item.label = popoverData.value;
+      //fab.close();
     });
+  }
+
+  //add to Calendar
+  addToCalendar(event, fab: FabContainer){
+    console.log('add calendar event');
+    let modal = this.modalCtrl.create('DateModalPage');
+
+    modal.present();
+
+    modal.onDidDismiss(data => {
+      if(data){
+        console.log(data.startTime);
+        this.item.startDate = data.startTime;
+        //fab.close();
+      } else {
+        this.item.startDate = '';
+      }
+
+      console.log(new Date(data.startTime));
+    });
+  }
+
+  //remove calendar Date
+  removeFromCal(){
+    console.log("remove item from calendar");
+    this.item.startDate = "";
   }
 
   //using camera
@@ -130,24 +148,26 @@ export class AddShoppingItemPage {
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      saveToPhotoAlbum: false
+      saveToPhotoAlbum: false,
+      correctOrientation: true
     }
 
     this.camera.getPicture(options).then((imageData) => {
 
+      console.log('------- ************ -----------');
       console.log(imageData);
       //this.base64Image = this.sanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + imageData);
       this.base64Image = normalizeURL(imageData);
 
+      console.log('**************');
       console.log(this.base64Image);
 
       this.photos.push(this.base64Image);
       this.photos.reverse();
-      fab.close();
+      //fab.close();
     }, (err) => {
-      fab.close();
+      //fab.close();
       console.log(err);
-      
     });
   }
 

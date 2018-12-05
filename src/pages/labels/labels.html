@@ -1,0 +1,44 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+
+    <!-- <button ion-button menuToggle>
+      <ion-icon ios="ios-menu" md="md-menu" name="menu"></ion-icon>
+    </button> -->
+
+    <ion-title>Labels</ion-title>
+
+    <ion-buttons start>
+        <button ion-button icon-only (click)="dismissModal()">
+            Cancel
+        </button>
+    </ion-buttons>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="saveLabels()">
+            Done
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <ion-list>
+        <ion-item-sliding *ngFor="let p of (sectionLabels | async)">
+          <ion-item>
+            <ion-label>{{p.title}}</ion-label>
+          </ion-item>
+          <ion-item-options side="right">
+              <button ion-button color="primary" (click)="editLabel(p)">
+                <i class="material-icons">edit</i>
+              </button>
+            <button ion-button color="danger" (click)="deleteLabel(p)">
+              <i class="material-icons">delete</i>
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+    </ion-list> 
+
+</ion-content>

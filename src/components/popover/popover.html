@@ -1,7 +1,16 @@
 <!-- Generated template for the PopoverComponent component -->
+
+<!-- <ion-list radio-group>
+  <ion-item *ngFor="let l of labels">
+    <ion-label> {{l.text}}</ion-label>
+    <ion-radio value="{{l.value}}" (click)="chageLabel(l)" checked="false"></ion-radio>
+  </ion-item>
+</ion-list> -->
+
+
 <ion-list radio-group>
-  <ion-item *ngFor="let item of items">
-    <ion-label> {{item.text}}</ion-label>
-    <ion-radio value="{{item.value}}" (click)="chageLabel(item)" checked="{{item.checked}}"></ion-radio>
+  <ion-item *ngFor="let l of (labelsList | async)">
+    <ion-label> {{l.title}}</ion-label>
+    <ion-radio value="{{l.value}}" (click)="chageLabel(l)" checked="false"></ion-radio>
   </ion-item>
 </ion-list>

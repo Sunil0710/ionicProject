@@ -1,44 +1,86 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Add Item</ion-title>
+  <ion-navbar color="primary">
+    <!-- <ion-title>Add Item</ion-title> -->
+    <ion-buttons end>
+        <button ion-button icon-only style="padding: 5px" (click)="presentPopover($event, fab)">
+            <ion-icon>
+                <i class="material-icons">label</i>
+            </ion-icon>
+        </button>
+
+        <button ion-button icon-only style="padding: 5px" 
+                (click)="addToCalendar($event, fab)"
+                *ngIf="item.startDate === ''">
+            <ion-icon>
+                <i class="material-icons">event</i>
+            </ion-icon>
+        </button>
+
+        <button ion-button icon-only style="padding: 5px" (click)="takePicture($event, fab)">
+            <ion-icon>
+                <i class="material-icons">camera_alt</i>
+            </ion-icon>
+        </button>
+        
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
-<div *ngIf="fabList.classList.contains('fab-list-active')" class="backdrop"></div>
+<!-- <div *ngIf="fabList.classList.contains('fab-list-active')" class="backdrop"></div> -->
 
 <ion-content>
 
   <!-- Dropdown list iocns -->
-  <ion-fab top right edge #fab>
+  <!-- <ion-fab top right edge #fab>
       <button ion-fab mini><ion-icon name="arrow-down"></ion-icon></button>
       <ion-fab-list #fabList>
-          <button ion-fab (click)="presentPopover($event)">
+          <button ion-fab (click)="presentPopover($event, fab)">
             <ion-icon  color="primary">
               <i class="material-icons">label</i>
             </ion-icon>
           </button>
-          <button ion-fab><ion-icon name="md-calendar" color="primary"></ion-icon></button>
+          <button ion-fab (click)="addToCalendar($event, fab)">
+            <ion-icon name="md-calendar" color="primary"></ion-icon>
+          </button>
           <button ion-fab (click)="takePicture($event, fab)">
               <ion-icon name="ios-camera" color="primary"></ion-icon>
           </button>
       </ion-fab-list>
-  </ion-fab>
+  </ion-fab> -->
 
   <!-- Note title -->
-  <ion-item>
+  <!-- <ion-item>
     <ion-input [(ngModel)]="item.title" placeholder="enter title"></ion-input>
-  </ion-item>
+  </ion-item> -->
+
+  <ion-list id="calendarItem">
+    <ion-item>
+          <ion-input [(ngModel)]="item.title" placeholder="enter title"></ion-input>
+    </ion-item>
+    <ion-item-sliding>
+        <ion-item *ngIf="item.startDate !== ''">
+          {{item?.startDate | date: 'MMM dd, yyyy'}}
+          <ion-icon item-end color="primary" (click)="addToCalendar($event, fab)">
+            <i class="material-icons"> event </i>
+          </ion-icon>
+        </ion-item>
+        
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="removeFromCal()">Remove</button>
+        </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
   <!-- Listed Items -->
   <ion-list no-lines id="listItems">
     <ion-list-header>
-      <ion-icon name="add-circle-outline" color="primary" item-start></ion-icon>
+      <ion-icon ios="ios-add-circle-outline" md="md-add-circle"  name="add-circle-outline" color="primary" item-start></ion-icon>
       <ion-input type="text" placeholder="add item name" #newItem (keyup.enter)="addItem(newItem.value);  newItem.value=''"></ion-input>
     </ion-list-header>
     <ion-item-group reorder="true" (ionItemReorder)="reorderItem($event)">
-      <ion-item-sliding *ngFor="let item of item.listedItems">
+      <ion-item-sliding *ngFor="let item of item.listedItems" [@bounce]>
         <ion-item>
           <ion-label class="item-title">{{item.title}}</ion-label>
           <ion-checkbox class="item-cbox" checked={{item.checkItem}} (ionChange)="updateListedItems(item)"></ion-checkbox>
@@ -52,10 +94,10 @@
 
   <!-- Striked Items -->
   <ion-list no-lines id="strikedItems">
-    <ion-item-sliding *ngFor="let item of item.strikedItems">
+    <ion-item-sliding class="strikedItemsStyle" *ngFor="let item of item.strikedItems" [@bounce]>
       <ion-item>
         <ion-label class="item-title-checked" color="lightdark">{{item.title}}</ion-label>
-        <ion-checkbox class="item-cbox" color="primarylight" checked={{item.checkItem}} (ionChange)="updateStrikedItems(item)"></ion-checkbox>
+        <ion-checkbox class="item-cbox" checked={{item.checkItem}} (ionChange)="updateStrikedItems(item)"></ion-checkbox>
       </ion-item>
       <ion-item-options side="right">
         <button ion-button color="danger" (click)="deleteStrikedItem(item)">Delete</button>
@@ -64,10 +106,20 @@
   </ion-list>
   <!-- {{item | json}} -->
 
+  <ion-grid>
+    <ion-row>
+        <ion-col col-6 *ngFor="let photo of photos; let id = index">
+            <ion-card class="block">
+                <ion-icon name="ios-close-circle" class="deleteIcon" color="primary" (click)="deletePhoto(id)"></ion-icon>
+                <img src="{{photo}}" alt="photo" />
+            </ion-card>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-badge id="Itemlabel" *ngIf="item.label !== ''" [ngClass]="item.label">
       {{item?.label}}
   </ion-badge>
-  <button ion-button round id="saveBtn" (click)= "submitItem(item)">
+  <button ion-button round id="addBtn" (click)= "submitItem(item)">
     Add
   </button>
 </ion-content>

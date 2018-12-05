@@ -14,3 +14,108 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.homeItemTitle{
+    margin-left: 0.5em; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+#addBtn,
+#saveBtn{
+  width: 8em;
+  background-color: color($colors, primary);
+  opacity: 0.85;
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%,0%);
+  box-shadow: 0px 0px 15px 0px color($colors, primary);
+}
+
+//setting the box-shdow for ion-fab icons
+ion-fab .fab{
+  box-shadow: 0px 0px 5px rgba(255, 255, 255, 1) !important;
+}
+
+//when user clicks ion-fab icon background should be blured
+.backdrop { 
+  position: absolute; 
+  top: 0; left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(86, 86, 86, 0.3); 
+  z-index: 10; 
+}
+
+//when user clicks ion-fab, it'll give the border color and border-radius
+.fab-list-active{
+  border: 1px solid color($colors, primary);
+  border-radius: 30px;
+}
+
+
+.checkbox .checkbox-icon{
+    border-color: color($colors, primary);
+}
+
+#strikedItems .checkbox .checkbox-icon{
+    border-color:  rgba(105, 162, 41, 0);
+}
+
+
+.item-cbox{ // setting the item-check-box position and make it light color 
+    margin: 8px 10px 8px 2px;
+    opacity: 0.8;
+}
+
+.item-title-checked{
+    text-decoration: line-through;
+}
+
+
+#listItems > .list-header-ios{
+    border-bottom-width: 0.55px !important;
+}
+
+
+ //item label positioon and style
+ #Itemlabel{
+    position: fixed;
+    left: 10%;
+    bottom: 1%;
+    transform: translate(-50%,0%);
+}
+
+//list item border style
+#listItems{
+    margin-bottom: 1px !important;
+    //border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+//show the border for striked items 
+#strikedItems{
+    //border: 1px solid color($colors, primary);
+    border-top: 1px solid;
+    border-right: 0.55px solid;
+    border-left: 0.55px solid;
+    border-color: color($colors, primary);
+    border-radius: 15px 15px 0px 0px;
+}
+.strikedItemsStyle{
+    border-radius: 15px 15px 0px 0px;
+}
+#strikedItems .item-wrapper:last-child .item-block {
+    // border-bottom: 0.55px solid color($colors, primary);
+    border-bottom: 0px solid color($colors, primary);
+}
+
+
+ion-badge{
+    background-color: color($colors, lightdark) !important;
+}
+
+// ion-row ion-col ion-badge{
+//     background-color: color($colors, lightdark) !important;
+// }

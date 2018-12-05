@@ -1,0 +1,77 @@
+page-verification {
+    $color1 : color($colors, lightaqua);
+    .loginBg{
+        //background: linear-gradient(0deg, $color1, transparentize($color1, 0.5));
+        background: linear-gradient(0deg, transparentize($color1, 0.8), transparentize($color1, 0.5));
+    }
+    .scroll-content{
+        align-content: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    ion-card.card{
+        box-shadow: none;
+        background: rgba(0, 0, 0, 0);
+    }
+
+    // ion-card.card.card-ios{
+    //     margin: 0px;
+    //     min-width: 100%;
+    // }
+
+    ion-card.card{
+        margin: 0px;
+        min-width: 100%;
+    }
+    
+
+    ion-card-header.card-header{
+        color: #fafafa;
+        font-size: 25px;
+    }
+
+    ion-card-content.card-content{
+        padding: 10px 0px;
+    }
+
+    .item{
+        margin-bottom: 10px;
+        background-color: rgba(196, 196, 196, 0.11);
+    }
+    
+    .list > .item-block:first-child,
+    .list > .item-block:last-child{
+        border: none;
+    }
+    
+    ion-item ion-icon{
+        color: #BDBDBD;
+    }
+    
+    ion-label.label{
+        margin: 0px;
+    }
+    
+    .text-input{
+        color: #fafafa !important;
+    }
+
+    a{
+        color: color($colors,light);
+    }
+    
+    .material-icons.md-30 { 
+        font-size: 30px;
+        //transform: rotate(-90deg);
+        //margin-left: -5px;
+    }
+
+    #loginBtn{
+        width: 50px;
+        height: 50px;
+        background-color:transparentize($color1, 0.8);
+    }
+}

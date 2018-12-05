@@ -1,22 +1,28 @@
 page-home {
     ion-card{
-        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.3) !important;
-        border-radius: 5px !important;
-    }
-    .work{
-        background-color: #F4CD69;
-    }
-    
-    .health{
-        background-color: #488aff;
+        //box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.3) !important;
+        box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 0.3) !important;
+        border-radius: 0.5em !important;
     }
 
-    .personal{
-        background-color: #F47169;
+    #addItemBtn{
+        font-size: 2em;
     }
 
-    .home{
-        background-color: #F469BC;
+    .masonryGrid{
+        column-count: 2;
     }
 
+    .masonryGridItem{
+        display: inline-block;
+        margin: 0 2px 2px;
+        padding: 5px;
+
+    }
+
+    .header-border{
+        padding: 5px 0px;
+        //border-top: 1px solid;
+        border-width: 2px;
+    }        
 }

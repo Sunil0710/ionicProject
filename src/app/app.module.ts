@@ -12,7 +12,8 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
 import { ShoppingListService } from '../services/shopping-list/shopping-list-service';
 import { ToastService } from '../services/toast/toast-service';
 import { PopoverComponent } from '../components/popover/popover';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgCalendarModule } from 'ionic2-calendar';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,8 @@ import { PopoverComponent } from '../components/popover/popover';
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireDatabaseModule,
+    BrowserAnimationsModule,
+    NgCalendarModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

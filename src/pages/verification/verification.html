@@ -1,0 +1,33 @@
+<ion-content class="loginBg">
+    <ion-card>
+        <ion-card-header>
+            Verification
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list no-line>
+                <!-- <ion-item>
+                    <ion-label>
+                        <ion-icon>
+                            <i class="material-icons">person</i>
+                        </ion-icon>
+                    </ion-label>
+                    <ion-input type="text" placeholder="enter your phone number"></ion-input>
+                </ion-item> -->
+                <ion-item>
+                    <ion-label>
+                        <ion-icon>
+                            <i class="material-icons">vpn_key</i>
+                        </ion-icon>
+                    </ion-label>
+                    <ion-input type="password" placeholder="enter 6 digit code"></ion-input>
+                </ion-item>
+            </ion-list>
+            <a (click)="resend()">Resend Verification Code</a>
+        </ion-card-content>
+        <button ion-button round id="loginBtn" (click)="gotoHome()">
+            <ion-icon>
+                <i class="material-icons md-30">arrow_forward</i>
+            </ion-icon>
+        </button>
+    </ion-card>
+</ion-content>

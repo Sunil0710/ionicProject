@@ -1,0 +1,38 @@
+page-menu {
+    .bgColor{
+        background-color: color($colors, primary);
+        color: #ffff;
+    }
+    .spacerStyle{
+        height: 5vh;
+        background-color: color($colors, primary);
+    }
+
+    #userCard .item-inner {
+        border-bottom: 0px;
+    }
+
+    .menuHeader {
+        min-height: 15vh;
+        background: linear-gradient(45deg, rgba(166, 85, 186, 0.8), rgba(105, 105, 184, 0.8));
+        background-size: cover;
+      }
+      
+      .menuHeader:before{
+          content: '';
+          position: absolute;
+          display: block;
+          top: 0;
+          left: 16%;
+          height: 100%;
+          width: 68%;
+          transform: skew(30deg);
+        //   background-image: linear-gradient(rgb(166, 85, 186), rgb(105, 105, 184));
+          background-image: linear-gradient(45deg, rgba(166, 85, 186, 0.4), rgba(105, 105, 184, 0.4));
+          box-shadow: 0 0 60px 5px rgba(0,0,0, 0.1);
+      }
+      
+    //   .myprofileheaderbar {
+    //     background-color: transparent;
+    //   }
+}

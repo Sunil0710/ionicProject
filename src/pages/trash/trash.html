@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon ios="ios-menu" md="md-menu" name="menu"></ion-icon>
+    </button>
+    <ion-title>Recently Deleted</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <!-- if no items in the DB-->
+      <ion-item *ngIf="(shoppingList$ | async)?.length == 0">
+        Your Trash is empty.
+      </ion-item>
+      <!-- If items are in the DB-->
+      <!-- to dislay latest items as 1st item use .reverse() -->
+      <ion-col col-6 col-sm-4 col-md-4 col-lg-3 col-xl-3 *ngFor="let item of (shoppingList$ | async)?.reverse()">
+        <ion-card>
+          <ion-card-header class="header-border">
+            <ion-card-title style="padding: 0px; margin: 0px">
+              <ion-row no-padding>
+                <ion-col col-8 text-left class="homeItemTitle" navPush="TrashedDetailsPage" [navParams]="{item: item}">
+                  {{item.title}}
+                </ion-col>
+                <ion-col text-right style="margin-right: 5%">
+                  <!-- <ion-icon md="md-more" (click)="moreOptions(item)"></ion-icon> -->
+                  <i class="material-icons" (click)="moreOptions(item)">more_vert</i>
+                </ion-col>
+              </ion-row>
+            </ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

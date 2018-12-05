@@ -1,0 +1,56 @@
+<ion-menu [content]="content">
+  <ion-content>
+    <ion-item id="userCard" class="menuHeader">
+        <ion-avatar item-start>
+          <img src="img/avatar-finn.png">
+        </ion-avatar>
+        <h2>John David</h2>
+        <h3>john.david@gmail.com</h3>
+    </ion-item>
+
+    <ion-list>
+      <button ion-item menuClose *ngFor="let p of sectionOnePages" (click)="openPage(p)">
+        <ion-icon item-start [color]="isActive(p)">
+          <i class="material-icons">{{p.mdIcon}}</i>
+        </ion-icon>
+        <ion-label [color]="isActive(p)">{{p.title}}</ion-label>
+      </button>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+          <ion-label item-start>Labels</ion-label>
+          <ion-note item-end (click)="editLabels()">Edit</ion-note>
+      </ion-list-header>
+      <button ion-item menuClose *ngFor="let p of (sectionLabels | async)" (click)="openLabelPage(p)">
+          <ion-icon item-start>
+            <i class="material-icons">label</i>
+          </ion-icon>
+          <ion-label>{{p.title}}</ion-label>
+      </button>
+      <button ion-item menuClose (click)="openPrompt()">
+          <ion-icon item-start>
+            <i class="material-icons">add</i>
+          </ion-icon>
+          <ion-label>Create New</ion-label>
+      </button>
+    </ion-list>    
+
+    <ion-list>
+      <button ion-item menuClose *ngFor="let p of sectionThreePages" (click)="openPage(p)">
+        <ion-icon item-start [color]="isActive(p)">
+          <i class="material-icons">{{p.mdIcon}}</i>
+        </ion-icon>
+        <ion-label [color]="isActive(p)">{{p.title}}</ion-label>
+      </button>
+    </ion-list>
+  </ion-content>
+
+  <ion-footer>
+    <ion-toolbar>
+        <button ion-button  block (click)="logout()">Logout</button>
+    </ion-toolbar>
+  </ion-footer>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

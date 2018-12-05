@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-buttons end>
+        <button ion-button icon-only (click)="cancel()">
+          <!-- <ion-icon name="close"></ion-icon> -->
+          Cancel
+        </button>
+      </ion-buttons>
+      <ion-title>Calendar Details</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-list>
+      <ion-list-header>Select Start Date</ion-list-header>
+      <ion-item>
+        <ion-label>Start</ion-label>
+        <ion-datetime displayFormat="MMM DD YYYY" pickerFormat="MMM DD YYYY" [(ngModel)]="event.startTime"></ion-datetime>
+      </ion-item>
+    </ion-list>
+
+    <button ion-button full icon-left (click)="save()">
+      Add to Calendar
+    </button>
+  </ion-content>

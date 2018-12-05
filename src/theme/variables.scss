@@ -34,15 +34,21 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #69A229,
+  //primary:    #69A229,
+  // primary:    #715f86, /* previous one */
+  primary: #9182c9,  /* Current One */
+  //primary:    #31686f,
+  //primary:    #00986a,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
   lightdark:  #a29c9c,
-  primarylight: rgba(105, 162, 41, 0.5)
+  lightaqua:  #5f8685
 );
 
+//color: linear-gradient(0deg, rgba(113, 95, 134, 0.2), rgba(95, 134, 133, 0.5))
+//color: linear-gradient(0deg, rgba(95, 134, 133, 0.2), rgba(95, 134, 133, 0.5))
 
 // Default padding for column 
 $grid-padding-width: 2px !default;
@@ -54,7 +60,6 @@ $grid-padding-widths: (
   lg: $grid-padding-width,
   xl: $grid-padding-width
 ) !default;
-
 
 // App iOS Variables
 // --------------------------------------------------

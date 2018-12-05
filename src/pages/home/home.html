@@ -1,66 +1,74 @@
 <ion-header>
   <ion-navbar color="primary">
+
+    <button ion-button menuToggle>
+      <ion-icon ios="ios-menu" md="md-menu" name="menu"></ion-icon>
+    </button>
+
     <ion-title>
       Shopping List - 2
     </ion-title>
 
-    <ion-buttons end> 
+    <ion-buttons end>
       <button ion-button navPush="AddShoppingItemPage">
-        <ion-icon name="add-circle-outline"></ion-icon>
+        <ion-icon id="addItemBtn" ios="ios-add-circle-outline" md="md-add-circle" name="add-circle-outline"></ion-icon>
       </button>
     </ion-buttons>
+
   </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-searchbar placeholder="Search Notes" showCancelButton color="danger" (ionInput)="searchItems($event)"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- <ion-list>
-    <ion-list-header>
-      Items
-    </ion-list-header>
-    <ion-item *ngFor="let item of shoppingList$ | async">
-      {{item.title}}
-    </ion-item>
-  </ion-list> -->
-
   <ion-grid>
     <ion-row>
       <!-- if no items in the DB-->
-
-      <ion-item *ngIf="(shoppingList$ | async)?.length == 0"> 
-        Your list is empty 
-        <p>Click &nbsp; <ion-icon name="add-circle-outline"></ion-icon> &nbsp; to add new task.</p>
+      <ion-item *ngIf="(shoppingList$ | async)?.length == 0">
+        You don't have any notes
       </ion-item>
-
       <!-- If items are in the DB-->
-      <ion-col col-6 *ngFor="let item of shoppingList$ | async">
+      <!-- to dislay latest items as 1st item use .reverse() -->
+      <ion-col col-6 col-sm-4 col-md-4 col-lg-3 col-xl-3 *ngFor="let item of (shoppingList$ | async)?.reverse()" [hidden]="showActive(item)"> <!-- [hidden] will display only actived items -->
         <ion-card>
-          <ion-card-header style="padding: 10px 0px">
+          <ion-card-header class="header-border">
             <ion-card-title style="padding: 0px; margin: 0px">
               <ion-row no-padding>
-                <ion-col text-left style="margin-left: 2%">
-                    {{item.title}}
+                <ion-col col-8 text-left class="homeItemTitle">
+                  {{item.title}}
                 </ion-col>
-                <ion-col text-right style="margin-right: 5%">
-                    <ion-icon name="ios-more" (click)="moreOptions(item)"></ion-icon>   
+                <ion-col text-right>
+                  <!-- <ion-icon ios="ios-more" md="md-more" (click)="moreOptions(item)" style="transform: rotate(90deg)"></ion-icon> -->
+                  <i class="material-icons" (click)="moreOptions(item)">more_vert</i>
                 </ion-col>
               </ion-row>
             </ion-card-title>
           </ion-card-header>
-          <ion-content style="height: 150px;" navPush="EditItemPage" [navParams]="{item: item}">
-              <!-- <ion-list> -->
-                  <ion-label *ngFor="let litems of item.listedItems; let i=index" style="margin-left: 5%; margin-top: 0px">
-                     <h3  *ngIf="i < 6"> 
-                        <!-- <ion-icon name="radio-button-off"></ion-icon> -->
-                        {{litems.title}} 
-                      </h3> 
-                  </ion-label>
-              <!-- </ion-list> -->
-          </ion-content>
+          <ion-card-content navPush="EditItemPage" [navParams]="{item: item}">
+            <!-- <ion-list> -->
+            <ion-label *ngFor="let litems of item.listedItems; let i=index" style="margin-top: 0px">
+              <!-- <h3  *ngIf="i < 5">  -->
+              <!-- <ion-icon name="radio-button-off"></ion-icon> -->
+              {{litems.title}}
+              <!-- </h3>  -->
+            </ion-label>
+            <!-- </ion-list> -->
+          </ion-card-content>
           <ion-row no-padding>
             <ion-col style="padding-bottom: 5px">
-              <ion-badge  *ngIf="item.label !== ''" [ngClass]="item.label">
+              <ion-badge *ngIf="item.label !== ''">
+                <!-- {{item.label.title}} -->
                 {{item.label}}
               </ion-badge>
+            </ion-col>
+            <ion-col>
+              <ion-buttons end *ngIf="item.startDate !== ''">
+                <button button>
+                  <ion-icon ios="ios-calendar-outline" md="md-calendar"></ion-icon>
+                </button>
+              </ion-buttons>
             </ion-col>
           </ion-row>
         </ion-card>
@@ -68,4 +76,5 @@
     </ion-row>
   </ion-grid>
   <!-- Length: {{(shoppingList$ | async)?.length}} -->
+  <!-- Reverse: {{(shoppingList$ | async)?.reverse()}} -->
 </ion-content>

@@ -1,0 +1,34 @@
+page-calendar {
+    $color1 : color($colors, primary);
+    //$color1 : color($colors, lightaqua);
+    .calBg{
+        //background: linear-gradient( to bottom, $color1, opacify($color1, 0.2));
+       // background: linear-gradient( 180deg, $color1, transparentize($color1, 0.5));
+        background: #ddd;
+    }
+
+    #addItemBtn{
+        font-size: 2em;
+    }
+
+
+    #searchBtn{
+        font-size: 25px;
+    }
+
+    .swiper-slide{
+        font-size: 1.2em !important;
+    }
+
+    .monthview-selected{
+        background-color: $color1 !important;
+    }
+
+    .monthview-current{
+        //border-radius: 100px !important;
+    }
+
+    [_nghost-c0] > div[_ngcontent-c0]{
+        height: 51% !important;
+    }
+}
